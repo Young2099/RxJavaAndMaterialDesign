@@ -14,6 +14,7 @@ import java.util.Map;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private List<Map<String, Object>> list;
     private List<Fragment> fragments = new ArrayList<>();
+
     private List<String> fragmentTitles = new ArrayList<>();
 
     public ViewPagerAdapter(FragmentManager fm) {
