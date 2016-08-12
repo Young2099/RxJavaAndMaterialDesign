@@ -6,12 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.demo.panguso.demo160714.ui.MainActivity;
-
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
 
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -29,40 +25,38 @@ public abstract class BaseFragment extends Fragment {
      */
     protected CompositeSubscription mCompositeSubscription;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initSubscribe();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         activity = (MainActivity) getActivity();
         mView = initView();
-        initSubscribe();
         return mView;
     }
 
     /**
      * 创建观察者
-     *
-     * @param onNext
-     * @param <T>
-     * @return
      */
-    protected <T> Subscriber newSubscriber(final Action1<? super T> onNext) {
+    public <T> Subscriber newSubscriber(final Action1<? super T> onNext) {
         return new Subscriber<T>() {
             @Override
             public void onCompleted() {
+
             }
 
             @Override
-            public void onError(Throwable throwable) {
-                if (throwable instanceof SocketTimeoutException) {
-                    Toast.makeText(getActivity(), "错误", Toast.LENGTH_SHORT).show();
-                } else if (throwable instanceof ConnectException) {
-                    Toast.makeText(getActivity(), "错误", Toast.LENGTH_SHORT).show();
-                }
+            public void onError(Throwable e) {
+
             }
 
             @Override
             public void onNext(T t) {
-                if (!mCompositeSubscription.isUnsubscribed()) {
+                if (mCompositeSubscription != null) {
                     onNext.call(t);
                 }
             }
@@ -76,7 +70,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mCompositeSubscription.unsubscribe();
+        if (mCompositeSubscription != null) {
+            mCompositeSubscription.unsubscribe();
+        }
     }
 
     public abstract View initView();

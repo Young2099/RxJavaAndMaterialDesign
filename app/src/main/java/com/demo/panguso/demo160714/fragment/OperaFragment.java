@@ -2,7 +2,6 @@ package com.demo.panguso.demo160714.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.demo.panguso.demo160714.R;
@@ -11,7 +10,8 @@ import com.demo.panguso.demo160714.base.BaseFragment;
 import com.demo.panguso.demo160714.bean.OperaMainBean;
 import com.demo.panguso.demo160714.net.WrapperAPI;
 
-import rx.Subscription;
+import java.util.List;
+
 import rx.functions.Action1;
 
 /**
@@ -22,6 +22,7 @@ public class OperaFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     View mHeader;
     OperaAdapter mOperaAdapter;
+    List<OperaMainBean.WeSeeItem> weSeeItems;
 
     @Override
     public View initView() {
@@ -31,26 +32,26 @@ public class OperaFragment extends BaseFragment {
         mHeader = View.inflate(getActivity(), R.layout.opera_header, null);
         mOperaAdapter = new OperaAdapter(getActivity());
         mOperaAdapter.setHeaderView(mHeader);
+        mHeader.findViewById(R.id.opera_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final WrapperAPI wrapperAPI = new WrapperAPI();
+                wrapperAPI.getDatas().subscribe(new Action1<List<OperaMainBean.WeSeeItem>>() {
+                    @Override
+                    public void call(List<OperaMainBean.WeSeeItem> operaMainBean) {
+
+
+                    }
+                });
+
+
+            }
+        });
         mRecyclerView.setAdapter(mOperaAdapter);
-        initData();
+
         return mView;
     }
 
-    /**
-     * 初始化页面的数据
-     */
-    private void initData() {
-        Subscription mSubscription = WrapperAPI.getInstance().getOperaData()
-                .subscribe(new Action1<OperaMainBean>() {
-                    @Override
-                    public void call(OperaMainBean o) {
-                        Log.e("TAG", "////");
-                    }
-
-
-                });
-        mCompositeSubscription.add(mSubscription);
-    }
 
 }
 

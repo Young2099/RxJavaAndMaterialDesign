@@ -1,7 +1,5 @@
 package com.demo.panguso.demo160714.bean;
 
-import com.demo.panguso.demo160714.net.Response;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,8 +10,8 @@ import java.util.List;
 /**
  * Created by ${yangfang} on 2016/8/5.
  */
-public class OperaMainBean extends Response {
-    String code;
+public class OperaMainBean {
+
 
     /**
      * JSON数据返回的是对象
@@ -120,4 +118,9 @@ public class OperaMainBean extends Response {
         return mWeSeeItems;
     }
 
+
+    @Override
+    public String toString() {
+        return "OperaMainBean{}";
+    }
 }
