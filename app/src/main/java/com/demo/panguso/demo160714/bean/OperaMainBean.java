@@ -118,9 +118,4 @@ public class OperaMainBean {
         return mWeSeeItems;
     }
 
-
-    @Override
-    public String toString() {
-        return "OperaMainBean{}";
-    }
 }

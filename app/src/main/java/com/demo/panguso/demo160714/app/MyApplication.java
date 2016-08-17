@@ -13,6 +13,7 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext = this;
     }
-    public MyApplication(){}
+    public MyApplication(){
+    }
 
 }
