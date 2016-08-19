@@ -2,6 +2,7 @@ package com.demo.panguso.demo160714.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.demo.panguso.demo160714.R;
@@ -34,7 +35,7 @@ public class OperaFragment extends BaseFragment {
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.opera_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         intData();
-//        mOperaAdapter = new OperaAdapter(getActivity(),weSeeItems);
+        mOperaAdapter = new OperaAdapter(getActivity(),weSeeItems);
         mRecyclerView.setAdapter(mOperaAdapter);
         return mView;
     }
@@ -51,6 +52,7 @@ public class OperaFragment extends BaseFragment {
                 String value = response.body().string();
                 try {
                     weSeeItems = OperaMainBean.getData(value);
+                    Log.e("TAG",weSeeItems.get(1).aid);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

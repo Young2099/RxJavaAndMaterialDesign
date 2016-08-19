@@ -54,8 +54,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_2"
+                android:layout_marginLeft="14dp"
                 android:layout_marginTop="10dp"
-                android:text="    收藏" />
+                android:text="收藏" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -115,8 +116,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_5"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="14dp"
                 android:gravity="center"
-                android:text="    刷新" />
+                android:text="刷新" />
         </RelativeLayout>
     </LinearLayout>
 

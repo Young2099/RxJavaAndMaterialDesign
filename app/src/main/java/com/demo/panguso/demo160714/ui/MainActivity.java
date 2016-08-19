@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mViewPager.setCurrentItem(1);
         }
         mTabLayout.setTabTitleTextSize(14);//标题字体大小
-        mTabLayout.setTitleTextColor(Color.WHITE,R.color.colorTextIndica);//标题字体颜色
+        mTabLayout.setTitleTextColor(Color.WHITE, R.color.colorTextIndica);//标题字体颜色
         mTabLayout.setTabStripWidth(110);//滑动条宽度
         mTabLayout.setDistributeEvenly(true); //均匀平铺选项卡
         mTabLayout.setSelectedIndicatorColors(Color.WHITE);
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         operaFragment = new OperaFragment();
         recommandFragment = new RecommandFragment();
         onAirFragment = new OnAirFragment();
-        setFragment(onAirFragment,"直播");
+        setFragment(onAirFragment, "直播");
         setFragment(recommandFragment, "推荐");
         setFragment(operaFragment, "番剧");
         setFragment(areaFragment, "分区");
@@ -145,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_drawer, menu);
-        getMenuInflater().inflate(R.menu.menu_main,menu);
         return true;
     }
 
@@ -159,20 +158,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

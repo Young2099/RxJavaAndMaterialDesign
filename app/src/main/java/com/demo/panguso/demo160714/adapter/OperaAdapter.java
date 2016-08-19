@@ -2,6 +2,7 @@ package com.demo.panguso.demo160714.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,22 +29,24 @@ public class OperaAdapter extends RecyclerView.Adapter<OperaViewHolder> {
 
     @Override
     public OperaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = null;
+        OperaViewHolder viewHolder = null;
         switch (viewType) {
             case TYPE_NORMAL1:
-                view = View.inflate(mContext, R.layout.opera_item1, null);
+                View view  =  LayoutInflater.from(mContext).inflate(R.layout.opera_item1, parent, false);
+                viewHolder = new OperaViewHolder(view);
                 break;
             default:
                 break;
         }
-        return new OperaViewHolder(view, mContext);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(OperaViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case TYPE_NORMAL1:
-
+                GridViewAdapter gridViewAdapter = new GridViewAdapter(mContext,data);
+                holder.mGridView.setAdapter(gridViewAdapter);
                 break;
             default:
                 break;
@@ -53,13 +56,9 @@ public class OperaAdapter extends RecyclerView.Adapter<OperaViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        int type;
-        if (position == 0) {
-            type = TYPE_HEADER;
-        } else {
+        int type = 0;
+        if (position == 0)
             type = TYPE_NORMAL1;
-        }
-
         return type;
     }
 
