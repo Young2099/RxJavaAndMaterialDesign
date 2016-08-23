@@ -7,14 +7,13 @@ import android.widget.GridView;
 import com.demo.panguso.demo160714.R;
 
 /**
- * Created by ${yangfang} on 2016/8/2.
+ * Created by ${yangfang} on 2016/8/23.
  */
 public class OperaViewHolder extends RecyclerView.ViewHolder {
-
     public GridView mGridView;
-    public OperaViewHolder(View itemView) {
-        super(itemView);
-        mGridView = (GridView) itemView.findViewById(R.id.opera_gridview);
-    }
 
+    public OperaViewHolder(View view) {
+        super(view);
+        mGridView = (GridView) view.findViewById(R.id.girdView);
+    }
 }

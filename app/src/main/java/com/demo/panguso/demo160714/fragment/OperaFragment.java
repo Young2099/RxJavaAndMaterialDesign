@@ -1,8 +1,11 @@
 package com.demo.panguso.demo160714.fragment;
 
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.demo.panguso.demo160714.R;
@@ -24,24 +27,44 @@ import java.util.List;
  * Created by panguso on 2016/7/15.
  */
 public class OperaFragment extends BaseFragment {
+    public static final int WHAT_SUCESS = 1;
+
     private View mView;
-    RecyclerView mRecyclerView;
-    OperaAdapter mOperaAdapter;
-    List<OperaMainBean.WeSeeItem> weSeeItems;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
+    private OperaAdapter mOperaAdapter;
+    private View mHeaderView;
+    private List<OperaMainBean.WeSeeItem> weSeeItems;
+    private android.os.Handler handler = new android.os.Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == WHAT_SUCESS){
+                mOperaAdapter.setData(weSeeItems);
+                mOperaAdapter.notifyDataSetChanged();
+            }
+        }
+    };
 
     @Override
     public View initView() {
         mView = View.inflate(activity, R.layout.opera_fragment, null);
-        mRecyclerView = (RecyclerView) mView.findViewById(R.id.opera_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        intData();
-        mOperaAdapter = new OperaAdapter(getActivity(),weSeeItems);
-        mRecyclerView.setAdapter(mOperaAdapter);
+        intView(mView);
         return mView;
     }
 
-    private void intData() {
+    private void intView(View mView) {
+        swipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.swiprefresh);
+        recyclerView = (RecyclerView) mView.findViewById(R.id.opera_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        mOperaAdapter = new OperaAdapter(activity);
+        initData();
+        mHeaderView = LayoutInflater.from(activity).inflate(R.layout.opera_header_view, null);
+        mOperaAdapter.setHeaderView(mHeaderView);
+        recyclerView.setAdapter(mOperaAdapter);
+    }
+    private void initData() {
         OkHttpUtils.getInstance().getAscy(ConstantUrl.Opera2Url, new Callback() {
+
             @Override
             public void onFailure(Request request, IOException e) {
 
@@ -49,14 +72,16 @@ public class OperaFragment extends BaseFragment {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                String value = response.body().string();
-                try {
-                    weSeeItems = OperaMainBean.getData(value);
-                    Log.e("TAG",weSeeItems.get(1).aid);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    String value = response.body().string();
+                    try {
+                        weSeeItems = OperaMainBean.getData(value);
+                        Log.e("TAG","w"+weSeeItems.get(1).pic);
+                        handler.sendEmptyMessage(WHAT_SUCESS);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
+
         });
     }
 
