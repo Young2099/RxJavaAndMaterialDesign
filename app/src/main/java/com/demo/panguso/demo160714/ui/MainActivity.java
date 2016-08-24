@@ -23,6 +23,7 @@ import com.demo.panguso.demo160714.fragment.DiscoverFragment;
 import com.demo.panguso.demo160714.fragment.OnAirFragment;
 import com.demo.panguso.demo160714.fragment.OperaFragment;
 import com.demo.panguso.demo160714.fragment.RecommandFragment;
+import com.demo.panguso.demo160714.utility.imageview.ImageCacheManager;
 import com.demo.panguso.demo160714.view.SlidingTabLayout;
 
 import java.util.ArrayList;
@@ -159,5 +160,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+    }
+
+    public ImageCacheManager getImageCacher(){
+        return new ImageCacheManager(this);
     }
 }

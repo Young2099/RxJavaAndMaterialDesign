@@ -14,6 +14,6 @@ public class OperaViewHolder extends RecyclerView.ViewHolder {
 
     public OperaViewHolder(View view) {
         super(view);
-        mGridView = (GridView) view.findViewById(R.id.girdView);
+        mGridView = (GridView) view.findViewById(R.id.gridview);
     }
 }

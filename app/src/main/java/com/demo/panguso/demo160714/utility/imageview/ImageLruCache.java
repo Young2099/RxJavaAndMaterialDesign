@@ -75,10 +75,17 @@ public class ImageLruCache extends LruCache<String, Bitmap> implements ImageLoad
      * @return
      */
     private File getDiskCache(Context context, String images) {
-        String cachePath = null;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
-                !Environment.isExternalStorageRemovable()) {
-            cachePath = context.getExternalCacheDir().getPath();
+        String cachePath;
+
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            if(context!=null && context.getExternalCacheDir()!=null){
+                cachePath =context.getExternalCacheDir().getPath() ;
+            }else{
+                cachePath = context.getCacheDir().getPath();
+            }
+
+
         } else {
             cachePath = context.getCacheDir().getPath();
         }

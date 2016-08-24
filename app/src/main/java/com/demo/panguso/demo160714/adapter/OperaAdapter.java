@@ -2,12 +2,9 @@ package com.demo.panguso.demo160714.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 import com.demo.panguso.demo160714.R;
 import com.demo.panguso.demo160714.bean.OperaMainBean;
@@ -57,10 +54,10 @@ public class OperaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_HEADER) {
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
-            headerViewHolder.mView.setImageResource(R.mipmap.e);
+            headerViewHolder.mImageView.setImageResource(R.mipmap.e);
         } else if (getItemViewType(position) == TYPE_NORMAL1) {
             OperaViewHolder viewHolder = (OperaViewHolder) holder;
-            viewHolder.mGridView.setAdapter(new CommonViewAdapter());
+            viewHolder.mGridView.setAdapter(new CommonViewAdapter(mContext,data));
         }
     }
 
@@ -75,46 +72,7 @@ public class OperaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void setData(List<OperaMainBean.WeSeeItem> data) {
         this.data = data;
-        Log.e("TAG", "DDDDDDD" + data.get(1).pic);
     }
 
-    private class CommonViewAdapter extends BaseAdapter {
 
-        public CommonViewAdapter() {
-        }
-
-        @Override
-        public int getCount() {
-            return 6;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return data.get(i);
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-            ViewHolder viewHolder;
-            if (convertView == null) {
-                convertView = View.inflate(mContext, R.layout.item_opera_grid, null);
-                viewHolder = new ViewHolder();
-                viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_grid);
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-//            viewHolder.imageView.setImageResource(R.mipmap.e);
-            return convertView;
-        }
-
-        private class ViewHolder {
-            ImageView imageView;
-        }
-    }
 }
