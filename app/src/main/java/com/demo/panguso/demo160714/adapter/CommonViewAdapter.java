@@ -29,7 +29,7 @@ public class CommonViewAdapter extends BaseAdapter {
         if (weSeeItems == null) {
             return 0;
         }
-        return 6;
+        return 4;
     }
 
     @Override
@@ -51,15 +51,13 @@ public class CommonViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_opera_grid, null);
             viewHolder = new ViewHolder();
-            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_grid);
-            viewHolder.imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE); // 设置缩放方式
-            viewHolder.imageView.setPadding(5, 0, 5, 0); // 设置ImageView的内边距
+            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_item2);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 //        ImageLoader.getInstance().displayImage(weSeeItems.get(position).pic, viewHolder.imageView, ImageLoaderOptions.getDefaultOptions());
-        ((MainActivity) mContext).getImageCacher().loadImage(weSeeItems.get(position).pic, viewHolder.imageView, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
+        ((MainActivity) mContext).getImageCacher().loadImageWithMemory(weSeeItems.get(position).pic, viewHolder.imageView, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
         return convertView;
     }
 

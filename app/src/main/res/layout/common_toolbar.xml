@@ -19,7 +19,9 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/drawer_home"
-        android:src="@drawable/bili_default_avatar" />
+        android:src="@drawable/bili_default_avatar"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/drawer_home" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,14 +31,17 @@
         android:layout_toEndOf="@+id/default_avatar"
         android:text="未登录"
         android:textColor="#fff"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/default_avatar" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true">
 
         <ImageView
             android:id="@+id/game_center"
